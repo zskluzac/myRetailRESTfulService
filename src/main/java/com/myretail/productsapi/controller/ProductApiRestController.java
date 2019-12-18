@@ -15,7 +15,7 @@ public class ProductApiRestController{
     }
 
     @RequestMapping("/products/{id}")
-    public String getProductById(@PathVariable String id) {
+    public Double getProductById(@PathVariable String id) {
         return dataScrapingService.getItemPriceById(id);
     }
 }
