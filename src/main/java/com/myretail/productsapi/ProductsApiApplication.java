@@ -1,6 +1,7 @@
 package com.myretail.productsapi;
 
 import com.mongodb.MongoClient;
+import com.myretail.productsapi.error.HttpErrorHandler;
 import cz.jirutka.spring.embedmongo.EmbeddedMongoFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +21,7 @@ public class ProductsApiApplication {
 
 	@Bean
 	public RestTemplate restTemplate(final RestTemplateBuilder restTemplateBuilder) {
-		return restTemplateBuilder.build();
+		return restTemplateBuilder.errorHandler(new HttpErrorHandler()).build();
 	}
 
 	@Bean
