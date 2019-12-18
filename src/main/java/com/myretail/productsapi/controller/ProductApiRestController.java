@@ -1,14 +1,21 @@
 package com.myretail.productsapi.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.myretail.productsapi.service.DataScrapingService;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProductApiRestController{
 
-    @GetMapping("/products/{id}")
+    public DataScrapingService dataScrapingService;
+
+    public ProductApiRestController(DataScrapingService dataScrapingService) {
+        this.dataScrapingService = dataScrapingService;
+    }
+
+    @RequestMapping("/products/{id}")
     public String getProductById(@PathVariable String id) {
-        return "empty return";
+        return dataScrapingService.getItemPriceById(id);
     }
 }

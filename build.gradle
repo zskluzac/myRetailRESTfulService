@@ -13,8 +13,8 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.google.code.gson:gson'
+	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
