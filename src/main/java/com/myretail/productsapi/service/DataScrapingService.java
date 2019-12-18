@@ -27,9 +27,10 @@ public class DataScrapingService {
 //                add("16752456");
 //                add("15643793");
 //            }});
-            public static final List<String> PRODUCT_ID_LIST = Collections.unmodifiableList(
-            new ArrayList<String>() {{
-                add("13860428");
+            public static final List<Integer> PRODUCT_ID_LIST = Collections.unmodifiableList(
+            new ArrayList<Integer>() {{
+                add(13860428);
+                add(13860427);
             }});
 
     public DataScrapingService(RestTemplate restTemplate, ProductPriceRepository productPriceRepository) {
@@ -39,14 +40,14 @@ public class DataScrapingService {
 
     @PostConstruct
     public void populateMongoDB() {
-        for(String id: PRODUCT_ID_LIST) {
+        for(Integer id: PRODUCT_ID_LIST) {
             productPriceRepository.save(
                     new ProductPrice(id, getItemPriceById(id), Constants.CURRENCY_CODE)
             );
         }
     }
 
-    public Double getItemPriceById(String id) {
+    public Double getItemPriceById(Integer id) {
 
         JsonObject restString = convertJSONStringToJSON(restTemplate
                 .getForObject(Constants.MY_RETAIL_URI_PREFIX + id + Constants.MY_RETAIL_URI_SUFFIX, String.class));
