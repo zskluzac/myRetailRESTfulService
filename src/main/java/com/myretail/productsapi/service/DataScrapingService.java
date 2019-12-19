@@ -8,8 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 
-import static com.myretail.productsapi.utils.Constants.CURRENCY_CODE;
-import static com.myretail.productsapi.utils.Constants.PRODUCT_ID_LIST;
+import static com.myretail.productsapi.utils.Constants.*;
 import static com.myretail.productsapi.utils.RestUtils.getProductData;
 
 @Service
@@ -26,15 +25,21 @@ public class DataScrapingService {
 
     @PostConstruct
     public void populateMongoDB() {
-        PRODUCT_ID_LIST.forEach((id) ->
+        for(int i=PRODUCT_ID_LOWER; i < PRODUCT_ID_UPPER; i++) {
+            JsonObject jsonString = getProductData(restTemplate, i);
+            if(jsonString.size() != 0) {
                 productPriceRepository.save(
-                        new ProductPrice(id, getItemPriceById(id), CURRENCY_CODE)
-                )
-        );
+                        new ProductPrice(i, getItemPriceById(i), CURRENCY_CODE)
+                );
+                System.out.println(i);
+            }
+        }
     }
 
     public Double getItemPriceById(Integer id) {
         JsonObject jsonString = getProductData(restTemplate, id);
+
+        if(jsonString == null) return null;
 
         JsonObject productJSON = (JsonObject) jsonString.get("product");
         JsonObject priceJSON = (JsonObject) productJSON.get("price");

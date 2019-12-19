@@ -31,9 +31,9 @@ public class OutboundDataCoordinationService {
     private JsonObject fetchProductPrice(final Integer id) {
         final JsonObject currentPrice = new JsonObject();
         final ProductPrice productPriceInfo = productPriceRepository.findById(id).orElse(null);
-        if(productPriceInfo == null ) {
-            return null;
-        }
+
+        if(productPriceInfo == null) return null;
+
         currentPrice.addProperty("value", productPriceInfo.getPrice());
         currentPrice.addProperty("currency_code", productPriceInfo.getCurrencyCode());
         return currentPrice;
@@ -41,9 +41,8 @@ public class OutboundDataCoordinationService {
 
     private JsonElement fetchProductName(final Integer id) {
         final JsonObject restString = getProductData(restTemplate, id);
-        if(restString.size() == 0) {
-            return new JsonObject();
-        }
+
+        if(restString.size() == 0) return null;
 
         JsonObject productJSON = (JsonObject) restString.get("product");
         JsonObject itemJSON = (JsonObject) productJSON.get("item");
