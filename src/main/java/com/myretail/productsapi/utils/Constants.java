@@ -3,8 +3,12 @@ package com.myretail.productsapi.utils;
 public class Constants {
     public static final Integer PRODUCT_ID_LOWER = 13860300;
     public static final Integer PRODUCT_ID_UPPER = 13860500;
+
+    public static final String LOCALHOST = "localhost";
+    public static final String MONGO_DB_NAME = "myRetailMongoDb";
     public static final String MY_RETAIL_URI_PREFIX = "https://redsky.target.com/v2/pdp/tcin/";
     public static final String MY_RETAIL_URI_SUFFIX = "?excludes=taxonomy,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics,deep_red_labels,available_to_promise_network,circle_offers";
+    public static final String CURRENCY_CODE_KEY = "currency_code";
     public static final String CURRENCY_CODE = "USD";
     public static final String EMPTY_JSON = "{}";
     public static final String PRODUCT = "product";
