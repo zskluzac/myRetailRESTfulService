@@ -7,8 +7,6 @@ import com.myretail.productsapi.service.OutboundDataCoordinationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.myretail.productsapi.utils.Constants.CURRENCY_CODE;
-
 @RestController
 public class ProductApiRestController{
 
@@ -28,8 +26,9 @@ public class ProductApiRestController{
 
     @PutMapping("/products/{id}")
     public ResponseEntity<ProductInfo> setProductPrice(@RequestBody ProductInfo productInfo, @PathVariable Integer id) {
+        ProductPrice currentPrice = productInfo.getCurrent_price();
         productPriceRepository.save(
-                new ProductPrice(id, productInfo.getCurrent_price().getValue(), CURRENCY_CODE)
+                new ProductPrice(id, currentPrice.getValue(), currentPrice.getCurrency_code())
         );
         return ResponseEntity.ok(productInfo);
     }
