@@ -34,8 +34,8 @@ public class OutboundDataCoordinationService {
 
         if(productPriceInfo == null) return null;
 
-        currentPrice.addProperty("value", productPriceInfo.getPrice());
-        currentPrice.addProperty("currency_code", productPriceInfo.getCurrencyCode());
+        currentPrice.addProperty("value", productPriceInfo.getValue());
+        currentPrice.addProperty("currency_code", productPriceInfo.getCurrency_code());
         return currentPrice;
     }
 

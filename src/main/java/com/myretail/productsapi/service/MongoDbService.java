@@ -12,33 +12,31 @@ import static com.myretail.productsapi.utils.Constants.*;
 import static com.myretail.productsapi.utils.RestUtils.getProductData;
 
 @Service
-public class DataScrapingService {
+public class MongoDbService {
 
     private RestTemplate restTemplate;
     private ProductPriceRepository productPriceRepository;
 
 
-    public DataScrapingService(RestTemplate restTemplate, ProductPriceRepository productPriceRepository) {
+    public MongoDbService(RestTemplate restTemplate, ProductPriceRepository productPriceRepository) {
         this.restTemplate = restTemplate;
         this.productPriceRepository = productPriceRepository;
     }
 
     @PostConstruct
-    public void populateMongoDB() {
+    public void populateMongoDb() {
         for(int i=PRODUCT_ID_LOWER; i < PRODUCT_ID_UPPER; i++) {
             JsonObject jsonString = getProductData(restTemplate, i);
             if(jsonString.size() != 0) {
                 productPriceRepository.save(
-                        new ProductPrice(i, getItemPriceById(i), CURRENCY_CODE)
+                        new ProductPrice(i, getItemPriceById(jsonString), CURRENCY_CODE)
                 );
-                System.out.println(i);
+                System.out.print(i + ", ");
             }
         }
     }
 
-    public Double getItemPriceById(Integer id) {
-        JsonObject jsonString = getProductData(restTemplate, id);
-
+    public Double getItemPriceById(JsonObject jsonString) {
         if(jsonString == null) return null;
 
         JsonObject productJSON = (JsonObject) jsonString.get("product");

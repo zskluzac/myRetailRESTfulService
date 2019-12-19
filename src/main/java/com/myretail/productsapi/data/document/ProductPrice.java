@@ -8,13 +8,13 @@ public class ProductPrice {
 
     @Id
     private Integer productId;
-    private Double price;
-    private String currencyCode;
+    private Double value;
+    private String currency_code;
 
-    public ProductPrice(Integer productId, Double price, String currencyCode) {
+    public ProductPrice(Integer productId, Double value, String currency_code) {
         this.productId = productId;
-        this.price = price;
-        this.currencyCode = currencyCode;
+        this.value = value;
+        this.currency_code = currency_code;
     }
 
     public Integer getProductId() {
@@ -25,19 +25,19 @@ public class ProductPrice {
         this.productId = productId;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getValue() {
+        return value;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setValue(Double value) {
+        this.value = value;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
+    public String getCurrency_code() {
+        return currency_code;
     }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    public void setCurrency_code(String currency_code) {
+        this.currency_code = currency_code;
     }
 }
