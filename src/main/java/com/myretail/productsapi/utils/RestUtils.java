@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import static com.myretail.productsapi.utils.Constants.EMPTY_JSON;
+
+
 public class RestUtils {
 
     public static JsonObject getProductData(final RestTemplate restTemplate, final Integer id) {
@@ -17,6 +20,6 @@ public class RestUtils {
         if(response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
             return (JsonObject) JsonParser.parseString(response.getBody());
         }
-        return (JsonObject) JsonParser.parseString("{}");
+        return (JsonObject) JsonParser.parseString(EMPTY_JSON);
     }
 }

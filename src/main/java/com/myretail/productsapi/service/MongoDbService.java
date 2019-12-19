@@ -31,7 +31,6 @@ public class MongoDbService {
                 productPriceRepository.save(
                         new ProductPrice(i, getItemPriceById(jsonString), CURRENCY_CODE)
                 );
-                System.out.print(i + ", ");
             }
         }
     }
@@ -39,9 +38,9 @@ public class MongoDbService {
     public Double getItemPriceById(JsonObject jsonString) {
         if(jsonString == null) return null;
 
-        JsonObject productJSON = (JsonObject) jsonString.get("product");
-        JsonObject priceJSON = (JsonObject) productJSON.get("price");
-        JsonObject listPriceJSON = (JsonObject) priceJSON.get("listPrice");
-        return listPriceJSON.get("price").getAsDouble();
+        JsonObject productJSON = (JsonObject) jsonString.get(PRODUCT);
+        JsonObject priceJSON = (JsonObject) productJSON.get(PRICE);
+        JsonObject listPriceJSON = (JsonObject) priceJSON.get(LIST_PRICE);
+        return listPriceJSON.get(PRICE).getAsDouble();
     }
 }

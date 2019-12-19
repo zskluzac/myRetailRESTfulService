@@ -1,9 +1,11 @@
 package com.myretail.productsapi.data.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@JsonIgnoreProperties("productId")
 public class ProductPrice {
 
     @Id

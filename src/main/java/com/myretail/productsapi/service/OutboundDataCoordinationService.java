@@ -7,6 +7,7 @@ import com.myretail.productsapi.data.repository.ProductPriceRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import static com.myretail.productsapi.utils.Constants.*;
 import static com.myretail.productsapi.utils.RestUtils.getProductData;
 
 @Service
@@ -22,9 +23,9 @@ public class OutboundDataCoordinationService {
 
     public String getProductInfoById(Integer id) {
         JsonObject output = new JsonObject();
-        output.addProperty("id", id);
-        output.add("name", fetchProductName(id));
-        output.add("current_price", fetchProductPrice(id));
+        output.addProperty(ID, id);
+        output.add(NAME, fetchProductName(id));
+        output.add(CURRENT_PRICE, fetchProductPrice(id));
         return output.toString();
     }
 
@@ -34,8 +35,8 @@ public class OutboundDataCoordinationService {
 
         if(productPriceInfo == null) return null;
 
-        currentPrice.addProperty("value", productPriceInfo.getValue());
-        currentPrice.addProperty("currency_code", productPriceInfo.getCurrency_code());
+        currentPrice.addProperty(VALUE, productPriceInfo.getValue());
+        currentPrice.addProperty(CURRENCY_CODE, productPriceInfo.getCurrency_code());
         return currentPrice;
     }
 
@@ -44,9 +45,9 @@ public class OutboundDataCoordinationService {
 
         if(restString.size() == 0) return null;
 
-        JsonObject productJSON = (JsonObject) restString.get("product");
-        JsonObject itemJSON = (JsonObject) productJSON.get("item");
-        JsonObject productDescJSON = (JsonObject) itemJSON.get("product_description");
-        return productDescJSON.get("title");
+        JsonObject productJSON = (JsonObject) restString.get(PRODUCT);
+        JsonObject itemJSON = (JsonObject) productJSON.get(ITEM);
+        JsonObject productDescJSON = (JsonObject) itemJSON.get(PRODUCT_DESCRIPTION);
+        return productDescJSON.get(TITLE);
     }
 }
